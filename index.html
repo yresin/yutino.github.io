@@ -6,9 +6,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 16px;
+        line-height: 1.5;
+        word-wrap: break-word;
+    }
+
+    * {
+        box-sizing: border-box;
+
+    }
+
+    article {
+        max-width: 1012px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 0 13px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+</style>
 
 <body>
-    你好
+    <article class="article_view">
+        <!-- <header>
+            <h2>Jurassic Park</h2>
+        </header> -->
+        <ul>
+            <li>
+                <section class="main_view">
+                    <h3>/etc/apt/sources.list（替换镜像源）</h3>
+                    <pre>
+deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+                    </pre>
+                </section>
+            </li>
+            <li>
+                <section class="main_view">
+                    <h3>扩容磁盘空间(gparted扩容工具)</h3>
+                    <pre>
+<a target="_blank" href="https://blog.csdn.net/tcjy1000/article/details/135349729">1.sudo apt install gparted</a>
+                    </pre>
+                </section>
+            </li>
+            <li>
+                <section class="main_view">
+                    <h3>编译ns3和nr(非root用户,需要权限)</h3>
+                    <pre>
+sudo apt-get install libc6-dev
+apt-get install sqlite sqlite3 libsqlite3-dev
+git clone https://gitlab.com/nsnam/ns-3-dev.git
+cd ns-3-dev
+git checkout ns-3.39
+cd contrib
+git clone https://gitlab.com/cttc-lena/nr.git
+cd nr
+git checkout 5g-lena-v2.5.y
+
+./ns3 configure --enable-examples --enable-tests
+./ns3
+./test   
+                    </pre>
+                </section>
+            </li>
+            <li>
+                <section class="main_view">
+                    <h3>解决'for each n'is not a member of 'std'（chat方法）</h3>
+                    <pre>
+root@yresin-virtual-machine:/home/yresin/ns-3-dev/CMakeLists.txt
+17-20
+# 设置 C++ 标准为 17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)  
+
+root@yresin-virtual-machine:/home/yresin/ns-3-dev/src/wifi/test/wifi-emlsr-test.cc
+1490-1498
+// frame exchange sequence
+for (const auto& staIdPsduPair : psduIt->psduMap)
+{
+     std::for_each(m_staMacs.cbegin(), std::next(m_staMacs.cbegin(), m_nEmlsrStations), [&](auto&& staMac) {
+        if (!staMac->GetLinkIdByAddress(staIdPsduPair.second->GetAddr1()))
+        {
+            // not addressed to this non-AP MLD
+            return;
+        }
+                    </pre>
+                </section>
+            </li>
+            <li>
+
+                <section class="main_view">
+                    <h3>编译nrss(非root用户,需要权限)</h3>
+                    <pre>
+[NS3 dir]/contrib/nr
+[NS3 dir]/contrib/nrss, 
+Replace [NS3 dir]/contrib/nr by our modified module [NS3 dir]/contrib/nrss/nr_v2.5_modified
+
+./ns3 configure
+./ns3 build
+
+Put [NS3 dir]/contrib/nrss/scratch files into [NS3 dir]/scratch/
+
+./ns3 run nrss-test1
+                    </pre>
+                </section>
+
+            </li>
+        </ul>
+        <!-- <footer>
+            <p>
+                Posted on
+                <time datetime="2015-05-15 19:00">May 15</time>
+                by Staff.
+            </p>
+        </footer> -->
+    </article>
+
 </body>
 
 </html>
